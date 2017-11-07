@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>test</title>
+		
+	  <!-- <script src="https://cdn.bootcss.com/angular.js/1.6.3/angular.min.js"></script> -->
+	  	<script src="js/jquery-1.9.1.min.js"></script>
+<style>
+.chked{
+	display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+    width: 22px;
+    height: 22px;
+    background: url('img/blue.png') no-repeat;
+    border: none;
+    cursor: pointer;
+    background-position: 0 0;
+}
+.icheck{
+	position: absolute;
+    opacity: 0;
+	float: left;
+    margin-left: -20px;
+
+}
+.aa{
+	width: 150px;
+	height: 30px;
+}
+
+
+
+</style>
+	</head>
+<body>
+	<form>
+		<div class="aa">
+			<label class="ick" >
+				<div class="chked"><input type="checkbox" name="" class="icheck"> </div>记住密码
+			</label>
+
+		</div>
+		
+
+
+	</form>	
+
+
+<script type="text/javascript">
+//	 var chked = document.getElementsByClassName('chked')[0];
+//	 var ick = document.getElementsByClassName('ick');
+//	 var n = 0;
+//	 function myfun(){
+//	 		console.log(chked);
+//	 		if(n%2==1){
+//	 			chked.style.backgroundPosition = '-48px 0';
+//	 			n++;
+//	 		}else if(n%2==0){
+//	 			chked.style.backgroundPosition = '0 0';
+//	 			n=1;
+//	 		}	
+//	 };
+$(function(){
+	$('.ick').click(function(){
+		if($("input[type='checkbox']").prop('checked')){
+			$('.chked').css({'background-position':'-48px 0'});
+		}else{
+			$('.chked').css({'background-position':'0 0'});
+	}
+
+	});
+})
+			
+
+			
+		
+
+</script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        　<title>form 提交</title>   
+        <script type="text/javascript" src="angular.js"></script>
+
+
+    </head>
+<body>
+
+<form name="registerForm" class="registerForm" novalidate ng-submit="register(user)">
+                <div class="title">欢迎注册，和我们一起甜蜜生活</div>
+                <div class="form-group " ng-class="registerForm.username.$invalid ? '' : 'has-success'">
+                    <div class="input-group">
+                        <div class="input-group-addon"><span class=" iconfont icon-register icon-phone"></span></div>
+                        <input type="text" name="username" class="form-control" placeholder="请输入手机号码"
+                               ng-model="user.username"
+                               maxlength="11" required ng-pattern="/1[3|5|7|8|][0-9]{9}/" ng-focus/>
+                    </div>
+                    <div class="form-error"
+                         ng-show="(registerForm.username.$invalid && registerForm.username.$dirty && !registerForm.username.$focused) || (registerForm.username.$invalid && submitted )">
+                        <span ng-show="registerForm.username.$error.required">手机号不能为空</span>
+                        <span ng-show="registerForm.username.$error.pattern">请输入正确的手机号码</span> 
+                    </div>
+                </div>
+
+                <div class="form-group row sms-code-row">
+                    <div class="col-xs-6 input-sms-code">
+                        <input type="text" value="" name="sms_code" class="form-control" ng-model="user.sms_code"
+                               placeholder="请输入6位验证码" required ng-maxlength="6" maxlength="6"/>
+                    </div>
+                    <div class="col-xs-6 btn-sms-code">
+                        <button type="button" class="btn btn-default btn-register btn-tianmi"
+                                ng-click="getVerifyCode(user.username)"
+                                ng-disabled="sms_code_status || registerForm.username.$invalid">{{sms_code_content}}
+                        </button>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-error"
+                         ng-show="(registerForm.sms_code.$invalid && registerForm.sms_code.$dirty) ||(registerForm.sms_code.$invalid && submitted) ">
+                        <span ng-show="registerForm.sms_code.$error.required">请输入验证码</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><span class=" iconfont icon-register icon-key"></span></div>
+                        <input type="password" name="password" ng-model="user.password" class="form-control"
+                               placeholder="请输入登录密码"
+                               required
+                               ng-focus
+                               minlength="6"
+                               ng-pattern="/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/"/>
+                    </div>
+                    <div class="form-error"
+                         ng-show="(registerForm.password.$invalid && registerForm.password.$dirty && !registerForm.password.$focused) || (registerForm.password.$invalid && submitted)">
+                        <span ng-show="registerForm.password.$error.minlength">密码不能少于6位</span>
+                        <span ng-show="registerForm.password.$error.pattern">密码必须由数字和字母组成</span>
+                        <span ng-show="registerForm.password.$error.required">密码不能为空</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><span class=" iconfont icon-register icon-key"></span></div>
+                        <input type="password" name="repeat_password" class="form-control"
+                               ng-model="user.repeat_password" ng-focus
+                               placeholder="请再次输入密码" required pw-check match="user.password"/>
+                        <!--<span class="iconfont icon-yonghu"></span>-->
+                    </div>
+                    <div class="form-error"
+                         ng-show="(registerForm.repeat_password.$invalid && registerForm.repeat_password.$dirty && registerForm.repeat_password.$focused) || (registerForm.repeat_password.$invalid && submitted)">
+                        <span ng-show="registerForm.repeat_password.$error.required">密码不能为空</span>
+                        <span ng-show="registerForm.$error.matchError">两次密码不一样</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><span class=" iconfont icon-register icon-yonghu"></span></div>
+                        <input type="text" name="nick_name" class="form-control" ng-model="user.nick_name"
+                               placeholder="请输入昵称"
+                               minlength="2"
+                               maxlength="20"
+                               ng-focus
+                               ng-pattern="/^[a-zA-Z0-9\u0391-\uFFE5]{2,20}$/ "
+                               required/>
+                    </div>
+                    <div class="form-error"
+                         ng-show="(registerForm.nick_name.$invalid && registerForm.nick_name.$dirty  && registerForm.nick_name.$focused) || (registerForm.nick_name.$invalid && submitted)">
+                        <span ng-show="registerForm.nick_name.$error.required">昵称不能为空</span>
+                        <span ng-show="registerForm.nick_name.$error.pattern">昵称为2-20个字符，可由中文、字母和数字组成</span>
+                    </div>
+                </div>
+
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="protocol" ng-model="protocol" required> 同意&nbsp;&nbsp;<a
+                            class="protocol" href="http://123.57.246.184/wordpress/?p=1941" target="_blank">添米用户注册协议</a>&nbsp;和&nbsp;<a
+                            class="protocol" href="http://123.57.246.184/wordpress/?p=1939" target="_blank">添米投资服务协议</a>
+                    </label>
+                    <div class="form-error" ng-show="!protocol && submitted">
+                        <span>请先同意协议</span>
+                    </div>
+                </div>
+                <input type="submit" value="注册" class="btn btn-register btn-tianmi"/>
+                {{result}}
+            </form>
+<script type="text/javascript">
+
+    
+
+
+</script>
+            
+    </body>            
+ </html>

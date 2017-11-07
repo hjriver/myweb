@@ -1,0 +1,141 @@
+<!-- <!-<!- <!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>angular</title>
+		
+		<script src="https://cdn.bootcss.com/angular.js/1.6.3/angular.min.js"></script>
+		
+	</head>
+	<body>
+		<!-<div ng-app>
+			<p>名字：<input type="text" ng-model="name"/></p>
+			<h3>{{name}}</h3>
+		</div>-->
+		 <!-- <div ng-app="myapp" ng-controller="sitectrl">
+			<p>数量：<input type="number" ng-model="num"> 价格：<input type="number" ng-model="price"></p>
+			<h3>总价：<span class="allprice">{{num * price}}</span><h3>
+ -->			<!-- <div ng-init="names=['a','b','c']"> -->
+				<!-- <ul>
+					<li ng-repeat="x in names">
+						{{ x.Name +','+ x.Country }}
+					</li>
+				</ul> -->
+				<!-- <div>
+					{{ mytext }}
+				</div>		 -->
+			<!-- </div>
+			<h2 ng-bind="person"></h2>
+		</div>  -->
+		<!-- <div ng-app="myapp" ng-controller="myctrl">
+
+		</div>
+ -->		
+			 
+		
+
+<!-- 
+// 	var app = angular.module("myapp",[]);
+// 	// app.controller('myctrl',function($scope, $http){
+
+// 		// $http.get('mytest.text').then(function(response){
+// 		// 	$scope.namesed = response.data;
+// 		// });
+
+// 	// app.controller('myctrl',function($scope, $timeout){
+			
+// 	// 		$timeout(function(){
+// 	// 			$scope.person = 'tom';
+// 	// 		},2000);
+// 	// });
+
+// 	app.controller('sitectrl', function($scope, $http) {
+// 	$http.get('http://www.netfarme.com.cn/index.html').then(function successCallback(response) {
+// 			$scope.names = response.records;
+// 		}, function errorCallback(response) {
+// 			// 请求失败执行代码
+// 			alert('请求失败！');
+// 	});
+  
+// });
+
+ 	var myapp = angular.module('myapp',[]);
+ 	myapp.config(function($provide){
+ 		$provide.provider('greeting',function(){
+ 			return function(name){
+ 				alert('hello,'+name);
+ 			}
+ 			 // this.$get = function(){
+     //        	return function(name){
+     //            	alert("hello" + name);
+     //        	};
+     //    	};
+ 		})
+ 	})
+
+	
+
+
+	</body>
+</html> -->
+
+
+<html>
+<head>
+
+   <title>AngularJS Dependency Injection</title>
+   <script src="https://cdn.bootcss.com/angular.js/1.6.3/angular.min.js"></script>
+
+
+
+</head>
+<body>
+   <h2>AngularJS Sample Application</h2>
+   <div ng-app="mainApp" ng-controller="CalcController">
+      <p>Enter a number: <input type="number" ng-model="number" />
+      <button ng-click="square()">X<sup>2</sup></button>
+      <p>Result: {{result}}</p>
+   </div>
+   
+   <script>
+      var mainApp = angular.module("mainApp", []);
+	  
+      // mainApp.config(function($provide) {
+      //    $provide.provider('MathService', function() {
+      //       this.$get = function() {
+      //          var factory = {};  
+      //          factory.multiply = function(a, b) {
+      //             return a * b; 
+      //          }
+      //          return factory;
+      //       };
+      //    });
+      // });
+
+      mainApp.value("defaultInput", 0);
+
+      mainApp.factory('MathService', function() {     
+         var factory = {};  
+         factory.multiply = function(a, b) {
+            return a * b; 
+         }
+         return factory;
+      }); 
+
+      mainApp.service('CalcService', function(MathService){
+            this.square = function(a) { 
+            return MathService.multiply(a,a); 
+         }
+      });
+
+      mainApp.controller('CalcController', function($scope, CalcService, defaultInput) {
+            $scope.number = defaultInput;
+            $scope.result = CalcService.square($scope.number);
+
+            $scope.square = function() {
+            $scope.result = CalcService.square($scope.number);
+         }
+      });
+   </script>
+</body>
+</html>
